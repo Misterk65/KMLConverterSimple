@@ -426,7 +426,7 @@ namespace KMLConverter
                                 case "lte":
                                     // RSRP     >=-69       -69 to -92  -92 to -99     <= -100     dBm
 
-                                    var rsrp = Convert.ToDouble(acc[13]);//Todo
+                                    var rsrp = Convert.ToDouble(acc[14]);//Todo
 
                                     if (rsrp > 0)
                                         rsrp = rsrp * -1;
@@ -435,28 +435,28 @@ namespace KMLConverter
                                     {
                                         iCounter++;
                                         File.AppendAllText(Path.Combine(tempPath, "Linestr.tmp"),
-                                            acc[0] + "," + acc[1] + "," + acc[2] + "," + acc[13] +
+                                            acc[0] + "," + acc[1] + "," + acc[2] + "," + acc[14] +
                                             ",LteCellExcellent" + Environment.NewLine);
                                     }
                                     else if (rsrp < -69 && rsrp >= -92)
                                     {
                                         iCounter++;
                                         File.AppendAllText(Path.Combine(tempPath, "Linestr.tmp"),
-                                            acc[0] + "," + acc[1] + "," + acc[2] + "," + acc[13] +
+                                            acc[0] + "," + acc[1] + "," + acc[2] + "," + acc[14] +
                                             ",LteCellGood" + Environment.NewLine);
                                     }
                                     else if (rsrp < -92 && rsrp >= -99)
                                     {
                                         iCounter++;
                                         File.AppendAllText(Path.Combine(tempPath, "Linestr.tmp"),
-                                            acc[0] + "," + acc[1] + "," + acc[2] + "," + acc[13] +
+                                            acc[0] + "," + acc[1] + "," + acc[2] + "," + acc[14] +
                                             ",LteCellMid" + Environment.NewLine);
                                     }
                                     else if (rsrp < -100)
                                     {
                                         iCounter++;
                                         File.AppendAllText(Path.Combine(tempPath, "Linestr.tmp"),
-                                            acc[0] + "," + acc[1] + "," + acc[2] + "," + acc[13] +
+                                            acc[0] + "," + acc[1] + "," + acc[2] + "," + acc[14] +
                                             ",LteCellEdge" + Environment.NewLine);
                                     }
                                     break;
@@ -582,187 +582,9 @@ namespace KMLConverter
                         {
                             acc = line.Split(';');
 
-                            /*if (acc[4] != compare && compare != string.Empty)
-                            {
-                                if (!trackArr.Exists(e => e.Contains(acc[1] + ";" + acc[2])))
-                                    if (trackArr.Count >= 2)
-                                    {
-                                        if (iCounter > 0)
-                                        {
-                                            lastSigQual = acc[4];
-                                            trackArr.Insert(0, lastVector);
-                                        }
-
-                                        x = trackArr.ToArray();
-                                        if (compare == Arrstyles[0])
-                                        {
-                                            docLteExcellent.Name = "[LTE]RSRP >= -69 dBm";
-                                            docLteExcellent.AddFeature(
-                                                TrackPlacemark(TrackLineString(x), compare, x[1]));
-                                        }
-                                        else if (compare == Arrstyles[1])
-                                        {
-                                            docLteGood.Name = "[LTE]RSRP -69 to -92 dBm";
-                                            docLteGood.AddFeature(TrackPlacemark(TrackLineString(x), compare, x[1]));
-                                        }
-                                        else if (compare == Arrstyles[2])
-                                        {
-                                            docLteMid.Name = "[LTE]RSRP -92 to -99 dBm";
-                                            docLteMid.AddFeature(TrackPlacemark(TrackLineString(x), compare, x[1]));
-                                        }
-                                        else if (compare == Arrstyles[3])
-                                        {
-                                            docLteEdge.Name = "[LTE]RSRP <-100 dBm";
-                                            docLteEdge.AddFeature(TrackPlacemark(TrackLineString(x), compare, x[1]));
-                                        }
-                                        else if (compare == Arrstyles[12])
-                                        {
-                                            doc3GExcellent.Name = "[3G]RSSI >= -68 dBm";
-                                            doc3GExcellent.AddFeature(TrackPlacemark(TrackLineString(x), compare,
-                                                x[1]));
-                                        }
-                                        else if (compare == Arrstyles[13])
-                                        {
-                                            doc3GGood.Name = "[3G]RSSI -68 to -84 dBm";
-                                            doc3GGood.AddFeature(TrackPlacemark(TrackLineString(x), compare, x[1]));
-                                        }
-                                        else if (compare == Arrstyles[14])
-                                        {
-                                            doc3GMid.Name = "[3G]RSSI -84 to -104 dBm";
-                                            doc3GMid.AddFeature(TrackPlacemark(TrackLineString(x), compare, x[1]));
-                                        }
-                                        else if (compare == Arrstyles[15])
-                                        {
-                                            doc3GEdge.Name = "[3G]RSSI <-104 dBm";
-                                            doc3GEdge.AddFeature(TrackPlacemark(TrackLineString(x), compare, x[1]));
-                                        }
-                                        else if (compare == Arrstyles[8])
-                                        {
-                                            doc2GExcellent.Name = "[2G]RSSI >= -59 dBm";
-                                            doc2GExcellent.AddFeature(TrackPlacemark(TrackLineString(x), compare,
-                                                x[1]));
-                                        }
-                                        else if (compare == Arrstyles[9])
-                                        {
-                                            doc2GGood.Name = "[2G]RSSI -59 to -81 dBm";
-                                            doc2GGood.AddFeature(TrackPlacemark(TrackLineString(x), compare, x[1]));
-                                        }
-                                        else if (compare == Arrstyles[10])
-                                        {
-                                            doc2GMid.Name = "[2G]RSSI -81 to -101 dBm";
-                                            doc2GMid.AddFeature(TrackPlacemark(TrackLineString(x), compare, x[1]));
-                                        }
-                                        else if (compare == Arrstyles[11])
-                                        {
-                                            doc2GEdge.Name = "[2G]RSSI <-101 dBm";
-                                            doc2GEdge.AddFeature(TrackPlacemark(TrackLineString(x), compare, x[1]));
-                                        }
-                                        lastVector = x[x.Length - 1];
-                                        compare = acc[4];
-                                        trackArr.Clear();
-                                        trackArr.Add(acc[1] + ";" + acc[2]);
-                                        iCounter++;
-                                    }
-                                    else
-                                    {
-                                        if (trackArr.Count == 0 || trackArr.Count == 1)
-                                        {
-                                            if (iCounter > 0)
-                                            {
-                                                lastSigQual = acc[4];
-                                                trackArr.Insert(0, lastVector);
-                                            }
-
-
-                                            trackArr.Add(acc[1] + ";" + acc[2]);
-                                            compare = lastSigQual;
-                                            x = trackArr.ToArray();
-                                            if (compare == Arrstyles[0])
-                                            {
-                                                docLteExcellent.Name = "[LTE]RSRP >= -69 dBm";
-                                                docLteExcellent.AddFeature(TrackPlacemark(TrackLineString(x), compare,
-                                                    x[1]));
-                                            }
-                                            else if (compare == Arrstyles[1])
-                                            {
-                                                docLteGood.Name = "[LTE]RSRP -69 to -92 dBm";
-                                                docLteGood.AddFeature(TrackPlacemark(TrackLineString(x), compare,
-                                                    x[1]));
-                                            }
-                                            else if (compare == Arrstyles[2])
-                                            {
-                                                docLteMid.Name = "[LTE]RSRP -92 to -99 dBm";
-                                                docLteMid.AddFeature(TrackPlacemark(TrackLineString(x), compare, x[1]));
-                                            }
-                                            else if (compare == Arrstyles[3])
-                                            {
-                                                docLteEdge.Name = "[LTE]RSRP <-100 dBm";
-                                                docLteEdge.AddFeature(TrackPlacemark(TrackLineString(x), compare,
-                                                    x[1]));
-                                            }
-                                            else if (compare == Arrstyles[12])
-                                            {
-                                                doc3GExcellent.Name = "[3G]RSSI >= -68 dBm";
-                                                doc3GExcellent.AddFeature(TrackPlacemark(TrackLineString(x), compare,
-                                                    x[1]));
-                                            }
-                                            else if (compare == Arrstyles[13])
-                                            {
-                                                doc3GGood.Name = "[3G]RSSI -68 to -84 dBm";
-                                                doc3GGood.AddFeature(TrackPlacemark(TrackLineString(x), compare, x[1]));
-                                            }
-                                            else if (compare == Arrstyles[14])
-                                            {
-                                                doc3GMid.Name = "[3G]RSSI -84 to -104 dBm";
-                                                doc3GMid.AddFeature(TrackPlacemark(TrackLineString(x), compare, x[1]));
-                                            }
-                                            else if (compare == Arrstyles[15])
-                                            {
-                                                doc3GEdge.Name = "[3G]RSSI <-104 dBm";
-                                                doc3GEdge.AddFeature(TrackPlacemark(TrackLineString(x), compare, x[1]));
-                                            }
-                                            else if (compare == Arrstyles[8])
-                                            {
-                                                doc2GExcellent.Name = "[2G]RSSI >= -59 dBm";
-                                                doc2GExcellent.AddFeature(TrackPlacemark(TrackLineString(x), compare,
-                                                    x[1]));
-                                            }
-                                            else if (compare == Arrstyles[9])
-                                            {
-                                                doc2GGood.Name = "[2G]RSSI -59 to -81 dBm";
-                                                doc2GGood.AddFeature(TrackPlacemark(TrackLineString(x), compare, x[1]));
-                                            }
-                                            else if (compare == Arrstyles[10])
-                                            {
-                                                doc2GMid.Name = "[2G]RSSI -81 to -101 dBm";
-                                                doc2GMid.AddFeature(TrackPlacemark(TrackLineString(x), compare, x[1]));
-                                            }
-                                            else if (compare == Arrstyles[11])
-                                            {
-                                                doc2GEdge.Name = "[2G]RSSI <-101 dBm";
-                                                doc2GEdge.AddFeature(TrackPlacemark(TrackLineString(x), compare, x[1]));
-                                            }
-                                            lastVector = x[x.Length - 1];
-                                            trackArr.Clear();
-                                            iCounter++;
-                                        }
-                                    }
-                                Lastwrite = false;
-                            }
-                            else
-                            {
-                                if (!trackArr.Exists(e => e.Contains(acc[1] + ";" + acc[2])))
-                                {
-                                    trackArr.Add(acc[1] + ";" + acc[2]);
-                                    compare = acc[4];
-                                    Lastwrite = true;
-                                }
-                            }*/
                             if (!trackArr.Exists(e => e.Contains(acc[1] + ";" + acc[2])))
                             {
                                 trackArr.Add(acc[1] + ";" + acc[2]);
-                                //compare = acc[4];
-                                //Lastwrite = true;
                             }
                         }
                         x = trackArr.ToArray();
@@ -770,75 +592,6 @@ namespace KMLConverter
                         docTrack.Name = "Driving Path";
                         docTrack.AddFeature(TrackPlacemark(TrackLineString(x), "Track",
                             x[1]));
-                        /*if (LineControl == trackArr.Count || Lastwrite)
-                        {
-                            if (Lastwrite)
-                                trackArr.Insert(0, lastVector);
-
-                            x = trackArr.ToArray();
-                            if (compare == Arrstyles[0])
-                            {
-                                docLteExcellent.Name = "[LTE]RSRP >= -69 dBm";
-                                docLteExcellent.AddFeature(TrackPlacemark(TrackLineString(x), compare,
-                                    x[1]));
-                            }
-                            else if (compare == Arrstyles[1])
-                            {
-                                docLteGood.Name = "[LTE]RSRP -69 to -92 dBm";
-                                docLteGood.AddFeature(TrackPlacemark(TrackLineString(x), compare, x[1]));
-                            }
-                            else if (compare == Arrstyles[2])
-                            {
-                                docLteMid.Name = "[LTE]RSRP -92 to -99 dBm";
-                                docLteMid.AddFeature(TrackPlacemark(TrackLineString(x), compare, x[1]));
-                            }
-                            else if (compare == Arrstyles[3])
-                            {
-                                docLteEdge.Name = "[LTE]RSRP <-100 dBm";
-                                docLteEdge.AddFeature(TrackPlacemark(TrackLineString(x), compare, x[1]));
-                            }
-                            else if (compare == Arrstyles[12])
-                            {
-                                doc3GExcellent.Name = "[3G]RSSI >= -68 dBm";
-                                doc3GExcellent.AddFeature(TrackPlacemark(TrackLineString(x), compare, x[1]));
-                            }
-                            else if (compare == Arrstyles[13])
-                            {
-                                doc3GGood.Name = "[3G]RSSI -68 to -84 dBm";
-                                doc3GGood.AddFeature(TrackPlacemark(TrackLineString(x), compare, x[1]));
-                            }
-                            else if (compare == Arrstyles[14])
-                            {
-                                doc3GMid.Name = "[3G]RSSI -84 to -104 dBm";
-                                doc3GMid.AddFeature(TrackPlacemark(TrackLineString(x), compare, x[1]));
-                            }
-                            else if (compare == Arrstyles[15])
-                            {
-                                doc3GEdge.Name = "[3G]RSSI <-104 dBm";
-                                doc3GEdge.AddFeature(TrackPlacemark(TrackLineString(x), compare, x[1]));
-                            }
-                            else if (compare == Arrstyles[8])
-                            {
-                                doc2GExcellent.Name = "[2G]RSSI >= -59 dBm";
-                                doc2GExcellent.AddFeature(TrackPlacemark(TrackLineString(x), compare,
-                                    x[1]));
-                            }
-                            else if (compare == Arrstyles[9])
-                            {
-                                doc2GGood.Name = "[2G]RSSI -59 to -81 dBm";
-                                doc2GGood.AddFeature(TrackPlacemark(TrackLineString(x), compare, x[1]));
-                            }
-                            else if (compare == Arrstyles[10])
-                            {
-                                doc2GMid.Name = "[2G]RSSI -81 to -101 dBm";
-                                doc2GMid.AddFeature(TrackPlacemark(TrackLineString(x), compare, x[1]));
-                            }
-                            else if (compare == Arrstyles[11])
-                            {
-                                doc2GEdge.Name = "[2G]RSSI <-101 dBm";
-                                doc2GEdge.AddFeature(TrackPlacemark(TrackLineString(x), compare, x[1]));
-                            }
-                        }*/
                     }
                 }
                 catch (Exception)
@@ -861,20 +614,7 @@ namespace KMLConverter
                 txtActivityLog.Text = txtActivityLog.Text + "Write track data to KML" + Environment.NewLine;
                 Application.DoEvents();
                 folder.AddFeature(docTrack);
-                folder.AddFeature(document);
-                folder.AddFeature(docLteExcellent);
-                folder.AddFeature(docLteGood);
-                folder.AddFeature(docLteMid);
-                folder.AddFeature(docLteEdge);
-                folder.AddFeature(doc3GExcellent);
-                folder.AddFeature(doc3GGood);
-                folder.AddFeature(doc3GMid);
-                folder.AddFeature(doc3GEdge);
-                folder.AddFeature(doc2GExcellent);
-                folder.AddFeature(doc2GGood);
-                folder.AddFeature(doc2GMid);
-                folder.AddFeature(doc2GEdge);
-
+               
                 txtActivityLog.Text = txtActivityLog.Text + "Write Measurement points to KML" + Environment.NewLine;
                 Application.DoEvents();
                 folder.AddFeature(CreateMeasPoints(docMeasPoints, workingArr));
@@ -921,9 +661,7 @@ namespace KMLConverter
         public string[] Readlog()
         {
             var lineCoordinates = new List<string>();
-            //var FilePath = Environment.ExternalStorageDirectory.Path;
             var FilePath = Application.StartupPath;
-            //var Filename = "test.log";
             var Filename = RawPath;
             var xs = string.Empty;
             string[] x;
@@ -939,41 +677,82 @@ namespace KMLConverter
                     {
                         x = checkForComma(srReader.ReadLine());
 
-                        if (x.Length >9)
-                        {
+                        //if (x.Length >= 27 && Convert.ToInt32(x[x.Length-1])>=28)
+                        //{
                             if (x.Length > 9)
-                                if (x.Length == 24)
-                                    lineCoordinates.Add(x[0] + "," + x[1] + "," + x[2] + "," + x[3] + "," + x[4] + "," +
-                                                        x[5] + "," + x[6] + "," + x[7] + "," + x[8] + "," + x[9] + "," + x[10] +
-                                                        "," + x[11] + "," + x[12] + "," + x[13] + "," + x[14] + "," + x[15] +
-                                                        "," + x[16] + "," + x[17] + "," + x[18] + "," + x[19].Replace(",", ";") +
-                                                        "," + x[20] + "," + x[21] + "," + x[22] + "," + x[23]);
-                                else if (x.Length == 20)
-                                    lineCoordinates.Add(x[0] + "," + x[1] + "," + x[2] + "," + x[3] + "," + x[4] + "," +
-                                                        x[5] + "," + x[6] + "," + x[7] + "," + x[8] + "," + x[9] + "," + x[10] +
-                                                        "," + x[11] + ",unknown," + x[12] + "," + x[13] + "," + x[14] + "," +
-                                                        x[15].Replace(",", ";") + "," + x[16] + "," + x[17] + "," + x[18] + ","
-                                                        + x[19]);
-                                else if (x.Length == 21)
-                                    lineCoordinates.Add(x[0] + "," + x[1] + "," + x[2] + "," + x[3] + "," + x[4] + "," +
-                                                        x[5] + "," + x[6] + "," + x[7] + "," + x[8] + "," + x[9] + "," +
-                                                        x[10] + "," + x[11] + "," + x[12] + "," + x[13] + "," + x[14] +
-                                                        "," + x[15] + "," + x[16].Replace(",", ";") + "," + x[17] +
-                                                        "," + x[18] + "," + x[19] + "," + x[20]);
-                                else if (x.Length == 22)
-                                    lineCoordinates.Add(x[0] + "," + x[1] + "," + x[2] + "," + x[3] + "," + x[4] + "," +
-                                                        x[5] + "," + x[6] + "," + x[7] + "," + x[8] + "," + x[9] + "," +
-                                                        x[10] + "," + x[11] + "," + x[12] + "," + x[13] + "," + x[14] +
-                                                        "," + x[15] + "," + x[16] + "," + x[17].Replace(",", ";") + "," +
-                                                        x[18] + "," + x[19] + "," + x[20] + "," + x[21]);
-                                else
-                                    lineCoordinates.Add(x[0] + "," + x[1] + "," + x[2] + "," + x[3] + "," + x[4] + "," +
-                                                        x[5] + "," + x[6] + "," + x[7] + "," + x[8] + "," + x[9] + "," +
-                                                        x[10] + "," + x[11] + "," + x[12] + "," + x[13] + "," + x[14] +
-                                                        "," + x[15] + "," + x[16] + "," + x[17] + "," + x[18] + "," +
-                                                        x[19].Replace(",", ";") + "," + x[20] + "," + x[21] + "," + x[22] +
-                                                        "," + x[23] + "," + x[24]);
-                        } 
+                            {
+                                    if (x.Length == 25)
+                                        lineCoordinates.Add(x[0] + "," + x[1] + "," + x[2] + "," + x[3] + "," + x[4] + "," +
+                                                            x[5] + "," + x[6] + "," + x[7] + "," + x[8] + "," + x[9] + "," + x[10] +
+                                                            "," + x[11] + "," + x[12] + "," + x[13] + "," + x[14] + "," + x[15] +
+                                                            "," + x[16] + "," + x[17] + "," + x[18] + "," + x[19].Replace(",", ";") +
+                                                            "," + x[20] + "," + x[21] + "," + x[22] + "," + x[23] + "," + x[24]);
+                                    else if (x.Length == 20)
+                                        lineCoordinates.Add(x[0] + "," + x[1] + "," + x[2] + "," + x[3] + "," + x[4] + "," +
+                                                            x[5] + "," + x[6] + "," + x[7] + "," + x[8] + "," + x[9] + "," + x[10] +
+                                                            "," + x[11] + ",unknown," + x[12] + "," + x[13] + "," + x[14] + "," +
+                                                            x[15].Replace(",", ";") + "," + x[16] + "," + x[17] + "," + x[18] + ","
+                                                            + x[19]);
+                                    else if (x.Length == 21)
+                                        lineCoordinates.Add(x[0] + "," + x[1] + "," + x[2] + "," + x[3] + "," + x[4] + "," +
+                                                            x[5] + "," + x[6] + "," + x[7] + "," + x[8] + "," + x[9] + "," +
+                                                            x[10] + "," + x[11] + "," + x[12] + "," + x[13] + "," + x[14] +
+                                                            "," + x[15] + "," + x[16].Replace(",", ";") + "," + x[17] +
+                                                            "," + x[18] + "," + x[19] + "," + x[20]);
+                                    else if (x.Length == 22)
+                                        lineCoordinates.Add(x[0] + "," + x[1] + "," + x[2] + "," + x[3] + "," + x[4] + "," +
+                                                            x[5] + "," + x[6] + "," + x[7] + "," + x[8] + "," + x[9] + "," +
+                                                            x[10] + "," + x[11] + "," + x[12] + "," + x[13] + "," + x[14] +
+                                                            "," + x[15] + "," + x[16] + "," + x[17].Replace(",", ";") + "," +
+                                                            x[18] + "," + x[19] + "," + x[20] + "," + x[21]);
+                                    else if (x.Length == 27)
+                                        lineCoordinates.Add(x[0]/*time*/ + "," + x[1]/*lat*/ + "," + x[2]/*lon*/ + "," + x[3]/*spd*/ + "," + x[4]/*hnd*/ + "," +
+                                                            x[5]/*nwtype*/ + "," + x[6]/*registered*/ + "," + x[12]/*mcc*/ + "," + x[13]/*mnc*/ + "," + x[7]/*ci*/ + ","
+                                                            + x[8]/*pci*/ + "," + x[9]/*tac*/ + "," + x[10]/*channel*/ + "," + x[14]/*ss*/ + "," + x[15]/*rsrp*/ + ","
+                                                            + x[16]/*rsrq*/ + "," + x[17]/*rssnr*/ + "," + x[18]/*cqi*/ + "," + x[19]/*ta*/ + "," + x[20]/*distance*/ + "," +
+                                                            x[21].Replace(",", ";")/*Address*/ + "," + x[22]/*provider*/ + "," + x[23]/*acc*/ + "," + x[24]/*roaming*/ +
+                                                            "," + x[25]/*poi*/ + "," + x[11]/*chbw*/ + "," + x[26]/*AndroidVersion*/);
+                                    else
+                                    {
+                                        MessageBox.Show(
+                                            "The logfile is not compatible with this Version of KML Converter.\r\rThe Application will be terminated!", "Error",
+                                            MessageBoxButtons.OK, MessageBoxIcon.Error);
+                                       Application.Exit();
+                                       break;
+                                    }
+                            }
+                        /*
+                             0: 636814354936713870; time
+                             1: 37.51966462; lat
+                             2: 127.10568134; lon
+                             3: 0.889999985694885; spd
+                             4: 304.600006103516; hnd
+                             5: Lte; nwtype
+                             6: YES; registered
+                             7: 1491982; ci
+                             8: 101; pci 
+                             9: 13; tac
+                             10: 1550(eFDD3); earfcn
+                             11: 20000; chbw
+                             12: 450; mMcc
+                             13: 08; mMnc 
+                             14: 31; ss
+                             15: -85; rsrp
+                             16: -10; rsrq
+                             17: unknown; rssnr
+                             18: unknown; cqi
+                             19: 2; ta
+                             20: 0.0900840367737288; distance
+                             21: Hyowon-ro, Maetan-dong, Yeongtong-gu, Suwon-si, Gyeonggi-do, South Korea,;address
+                             22: KT Freetel Co. Ltd. (KR);provider
+                             23: 48.2400016784668; accuracy
+                             24: False; roaming
+                             25: False; poi
+                             26: 28 android version
+                         */
+
+                        
+                        //}
                     }
                 }
                 catch (Exception ex)
@@ -990,14 +769,12 @@ namespace KMLConverter
             return s;
         }
 
-        public string[] ReadlogRedux()
+        private string[] ReadlogRedux()
         {
             var lineCoordinates = new List<string>();
-            //var FilePath = Environment.ExternalStorageDirectory.Path;
             var FilePath = Application.StartupPath;
-            //var Filename = "test.log";
             var Filename = RawPath;
-            var xs = string.Empty;
+            //var xs = string.Empty;
             string[] x;
 
             txtActivityLog.Text = "Read Log" + Environment.NewLine;
@@ -1229,7 +1006,7 @@ namespace KMLConverter
 
         public static Style MeasPointStyle(string id, string time, string lat, string lon, string location, string spd,
             string hnd, string nwtype, string mmc, string mnc, string ci, string pci, string tac, string earfcn,
-            string ss, string rsrp, string rsrq, string rssnr, string cqi, string ta, string provider, double accuracy, bool isroaming, bool poi)
+            string ss, string rsrp, string rsrq, string rssnr, string cqi, string ta, string provider, double accuracy, bool isroaming, bool poi, double chbw)
         {
             try
             {
@@ -1238,6 +1015,7 @@ namespace KMLConverter
                 var newrsrp = 0.0;
                 var roaminind = "";
                 var ispoi = "";
+                string bwdisplay = "";
 
                 if (rsrp == "unknown")
                 {
@@ -1265,6 +1043,15 @@ namespace KMLConverter
                     ispoi = "No";
                 }
 
+                if (chbw==-1)
+                {
+                    bwdisplay = " - Bandwidth not in Info";
+                }
+                else
+                {
+                    bwdisplay = " - Bandwidth: " + Convert.ToString(chbw / 1000) + " MHz";
+                }
+
                 var style = new Style
                 {
                     Balloon = new BalloonStyle(),
@@ -1281,7 +1068,7 @@ namespace KMLConverter
                                      + "Latitude: " + lat + System.Environment.NewLine
                                      + "Longitude: " + lon + System.Environment.NewLine
                                      + "Location: " + location + System.Environment.NewLine
-                                     + "Accuracy: " + Math.Round(accuracy,2) + " m" + System.Environment.NewLine + System.Environment.NewLine
+                                     + "Accuracy: " + Math.Round(accuracy,0) + " m" + System.Environment.NewLine + System.Environment.NewLine
                                      + "Moving Data" + System.Environment.NewLine
                                      + string.Format("Speed: {0:N1} kph", Convert.ToDouble(spd)) +
                                      System.Environment.NewLine
@@ -1296,7 +1083,7 @@ namespace KMLConverter
                                      + "Tracking Area Code: " + tac + System.Environment.NewLine +
                                      System.Environment.NewLine
                                      + "Measurements" + System.Environment.NewLine
-                                     + "EARFCN: " + earfcn + System.Environment.NewLine
+                                     + "EARFCN: " + earfcn + bwdisplay +  System.Environment.NewLine
                                      + "Sync Signal: " + ss + System.Environment.NewLine
                                      + "Ref. Signal Receive Power: " + newrsrp + " dBm" + System.Environment.NewLine
                                      + "Ref. Signal Receive Qual.: " + rsrq + " dB" + System.Environment.NewLine
@@ -1744,7 +1531,7 @@ namespace KMLConverter
                             //firstHandoverInd = false;
                             if (InformationElementNwType == "lte")
                             {
-//If campedcell ODD to cellnew AND cellnew is NOT empty the if branch will be taken otherwise the else
+                                //If campedcell ODD to cellnew AND cellnew is NOT empty the if branch will be taken otherwise the else
                                 if (campedcell != cellnew && cellnew != string.Empty)
                                 {
                                     campedcell = cellnew;
@@ -1833,8 +1620,6 @@ namespace KMLConverter
                             }
                         }
 
-
-                        //Hier weitersuchen
                         if (campedcell != cellnew)
                             handoverInd = true;
 
@@ -1903,7 +1688,6 @@ namespace KMLConverter
                 var id = workArray.Length;
                 document.Name = "Measurement Points";
                 document.Visibility = false;
-                //Measpointcounter = 0;
 
                 foreach (var item in workArray)
                 {
@@ -1920,7 +1704,40 @@ namespace KMLConverter
                     if (internalNwType == "gsm" || internalNwType == "edge" || internalNwType == "gprs")
                         internalNwType = "gsm";
 
-                    if (internalNwType == "lte" && itemArr.Length == 25) //internalNwType == "lte" && itemArr.Length == 25
+                    if (internalNwType == "lte" && itemArr.Length == 27 && Convert.ToInt32(itemArr[itemArr.Length-1])>=28)
+                    {
+                        var time = itemArr[0];
+                        var lat = itemArr[1];
+                        var lon = itemArr[2];
+                        var spd = itemArr[3];
+                        var hnd = itemArr[4];
+                        var nwtype = "LTE";
+                        var mcc = itemArr[7];
+                        var mnc = itemArr[8];
+                        var ci = itemArr[9];
+                        var pci = itemArr[10];
+                        var tac = itemArr[11];
+                        var earfcn = itemArr[12];
+                        var ss = itemArr[13];
+                        var rsrp = itemArr[14];
+                        var rsrq = itemArr[15];
+                        var rssnr = itemArr[16];
+                        var cqi = itemArr[17];
+                        var ta = itemArr[18];
+                        var location = itemArr[20];
+                        var provider = itemArr[21];
+                        var accuracy = itemArr[22];
+                        var isroaming = itemArr[23];
+                        var poi = itemArr[24];
+                        var chbw = itemArr[25];
+
+                        document.AddStyle(MeasPointStyle(Convert.ToString(id), time, lat, lon, location,
+                            (Convert.ToDouble(spd) * 3.6).ToString("F1"), hnd, nwtype, mcc, mnc, ci, pci, tac, earfcn, ss,
+                            rsrp, rsrq, rssnr, cqi, ta, provider, Convert.ToDouble(accuracy),Convert.ToBoolean(isroaming), Convert.ToBoolean(poi), Convert.ToDouble(chbw)));
+                        document.AddFeature(MeasPoints("BalloonStyle" + id, itemArr[5], itemArr[1], itemArr[2],
+                            itemArr[19]));
+                    }
+                    else if (internalNwType == "lte" && itemArr.Length == 25)
                     {
                         var time = itemArr[0];
                         var lat = itemArr[1];
@@ -1949,11 +1766,11 @@ namespace KMLConverter
                         document.AddStyle(MeasPointStyle(Convert.ToString(id), time, lat, lon, location,
                             (Convert.ToDouble(spd) * 3.6).ToString(), hnd, nwtype, mcc, mnc, ci, pci, tac, earfcn, ss,
                             rsrp, rsrq, rssnr, cqi, ta, provider, Convert.ToDouble(accuracy),
-                            Convert.ToBoolean(isroaming), Convert.ToBoolean(poi)));
+                            Convert.ToBoolean(isroaming), Convert.ToBoolean(poi),-1));
                         document.AddFeature(MeasPoints("BalloonStyle" + id, itemArr[5], itemArr[1], itemArr[2],
                             itemArr[19]));
                     }
-                    else if (internalNwType == "umts" && itemArr.Length == 21) //internalNwType == "umts" && itemArr.Length == 21
+                    else if (internalNwType == "umts" && itemArr.Length == 21)
                     {
                         var time = itemArr[0];
                         var lat = itemArr[1];
@@ -1982,9 +1799,8 @@ namespace KMLConverter
                         document.AddFeature(MeasPoints("BalloonStyle" + id, itemArr[5], itemArr[1], itemArr[2],
                             itemArr[15]));
                     }
-                    else if (internalNwType == "gsm" && itemArr.Length == 22) //internalNwType == "gsm" && itemArr.Length == 22
+                    else if (internalNwType == "gsm" && itemArr.Length == 22)
                     {
-                        //hier weiter machen
                         //Output String Order TimeStamp; Latitude; Longitude; Speed; Heading; Network Type; Registered; MMC; MNC; LAC; Cid;
                         //Uarfcn; BSIC; RSSI; Ber; TA; Address; Provider
 
@@ -2076,7 +1892,14 @@ namespace KMLConverter
                     LogInputfoldername = LogInputfoldername.Substring(0, LogInputfoldername.Length - 1);
                 }
 
-                filenamekml = displayfilename[displayfilename.Length-1];
+                if (displayfilename[displayfilename.Length - 1].StartsWith("Log-Part"))
+                {
+                    filenamekml = displayfilename[displayfilename.Length - 1].Replace("Log", displayfilename[displayfilename.Length - 2] ); 
+                }
+                else
+                {
+                    filenamekml = displayfilename[displayfilename.Length - 1];
+                }
                 textFolderName.Text = filenamekml.Substring(0, filenamekml.Length - 4);
                 filenamekml = filenamekml.Replace(".log", ".kml");
                 button1.Enabled = true;

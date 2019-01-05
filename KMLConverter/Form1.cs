@@ -610,6 +610,7 @@ namespace KMLConverter
                 document.Name = "Route Start/End";
                 document.AddFeature(PlaceStartEnd("End", workingArr[workingArr.Length - 1]));
                 document.AddStyle(StylePoints("End", "http://maps.google.com/mapfiles/kml/paddle/red-stars.png", 1.0));
+                folder.AddFeature(document);
 
                 txtActivityLog.Text = txtActivityLog.Text + "Write track data to KML" + Environment.NewLine;
                 Application.DoEvents();
@@ -774,8 +775,7 @@ namespace KMLConverter
             var lineCoordinates = new List<string>();
             var FilePath = Application.StartupPath;
             var Filename = RawPath;
-            //var xs = string.Empty;
-            string[] x;
+           string[] x;
 
             txtActivityLog.Text = "Read Log" + Environment.NewLine;
             Application.DoEvents();
@@ -786,44 +786,7 @@ namespace KMLConverter
                 {
                     while (srReader.Peek() >= 0)
                     {
-                        //x = checkForComma(srReader.ReadLine());
-                        //x = srReader.ReadLine().Split(';');
                         lineCoordinates.Add(srReader.ReadLine());
-                        /*if (x.Length > 9)
-                        {
-                            if (x.Length > 9)
-                                if (x.Length == 24)
-                                    lineCoordinates.Add(x[0] + "," + x[1] + "," + x[2] + "," + x[3] + "," + x[4] + "," +
-                                                        x[5] + "," + x[6] + "," + x[7] + "," + x[8] + "," + x[9] + "," + x[10] +
-                                                        "," + x[11] + "," + x[12] + "," + x[13] + "," + x[14] + "," + x[15] +
-                                                        "," + x[16] + "," + x[17] + "," + x[18] + "," + x[19].Replace(",", ";") +
-                                                        "," + x[20] + "," + x[21] + "," + x[22] + "," + x[23]);
-                                else if (x.Length == 20)
-                                    lineCoordinates.Add(x[0] + "," + x[1] + "," + x[2] + "," + x[3] + "," + x[4] + "," +
-                                                        x[5] + "," + x[6] + "," + x[7] + "," + x[8] + "," + x[9] + "," + x[10] +
-                                                        "," + x[11] + ",unknown," + x[12] + "," + x[13] + "," + x[14] + "," +
-                                                        x[15].Replace(",", ";") + "," + x[16] + "," + x[17] + "," + x[18] + ","
-                                                        + x[19]);
-                                else if (x.Length == 21)
-                                    lineCoordinates.Add(x[0] + "," + x[1] + "," + x[2] + "," + x[3] + "," + x[4] + "," +
-                                                        x[5] + "," + x[6] + "," + x[7] + "," + x[8] + "," + x[9] + "," +
-                                                        x[10] + "," + x[11] + "," + x[12] + "," + x[13] + "," + x[14] +
-                                                        "," + x[15] + "," + x[16].Replace(",", ";") + "," + x[17] +
-                                                        "," + x[18] + "," + x[19] + "," + x[20]);
-                                else if (x.Length == 22)
-                                    lineCoordinates.Add(x[0] + "," + x[1] + "," + x[2] + "," + x[3] + "," + x[4] + "," +
-                                                        x[5] + "," + x[6] + "," + x[7] + "," + x[8] + "," + x[9] + "," +
-                                                        x[10] + "," + x[11] + "," + x[12] + "," + x[13] + "," + x[14] +
-                                                        "," + x[15] + "," + x[16] + "," + x[17].Replace(",", ";") + "," +
-                                                        x[18] + "," + x[19] + "," + x[20] + "," + x[21]);
-                                else
-                                    lineCoordinates.Add(x[0] + "," + x[1] + "," + x[2] + "," + x[3] + "," + x[4] + "," +
-                                                        x[5] + "," + x[6] + "," + x[7] + "," + x[8] + "," + x[9] + "," +
-                                                        x[10] + "," + x[11] + "," + x[12] + "," + x[13] + "," + x[14] +
-                                                        "," + x[15] + "," + x[16] + "," + x[17] + "," + x[18] + "," +
-                                                        x[19].Replace(",", ";") + "," + x[20] + "," + x[21] + "," + x[22] +
-                                                        "," + x[23] + "," + x[24]);
-                        }*/
                     }
                 }
                 catch (Exception ex)

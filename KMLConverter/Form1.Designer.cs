@@ -46,10 +46,9 @@
             // 
             // button1
             // 
-            this.button1.Location = new System.Drawing.Point(209, 14);
-            this.button1.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.button1.Location = new System.Drawing.Point(157, 11);
             this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(157, 28);
+            this.button1.Size = new System.Drawing.Size(118, 23);
             this.button1.TabIndex = 0;
             this.button1.Text = "Create KML";
             this.button1.UseVisualStyleBackColor = true;
@@ -61,10 +60,10 @@
             // 
             // btnopenfile
             // 
-            this.btnopenfile.Location = new System.Drawing.Point(12, 12);
-            this.btnopenfile.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.btnopenfile.Location = new System.Drawing.Point(9, 10);
+            this.btnopenfile.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.btnopenfile.Name = "btnopenfile";
-            this.btnopenfile.Size = new System.Drawing.Size(157, 28);
+            this.btnopenfile.Size = new System.Drawing.Size(118, 23);
             this.btnopenfile.TabIndex = 1;
             this.btnopenfile.Text = "&Open File";
             this.btnopenfile.UseVisualStyleBackColor = true;
@@ -72,21 +71,21 @@
             // 
             // textFolderName
             // 
-            this.textFolderName.Location = new System.Drawing.Point(7, 27);
-            this.textFolderName.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.textFolderName.Location = new System.Drawing.Point(5, 22);
+            this.textFolderName.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.textFolderName.Name = "textFolderName";
-            this.textFolderName.Size = new System.Drawing.Size(335, 22);
+            this.textFolderName.Size = new System.Drawing.Size(252, 20);
             this.textFolderName.TabIndex = 2;
             this.textFolderName.TextChanged += new System.EventHandler(this.textFolderName_TextChanged);
             // 
             // grpBoxOutputName
             // 
             this.grpBoxOutputName.Controls.Add(this.textFolderName);
-            this.grpBoxOutputName.Location = new System.Drawing.Point(12, 87);
-            this.grpBoxOutputName.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.grpBoxOutputName.Location = new System.Drawing.Point(9, 71);
+            this.grpBoxOutputName.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.grpBoxOutputName.Name = "grpBoxOutputName";
-            this.grpBoxOutputName.Padding = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.grpBoxOutputName.Size = new System.Drawing.Size(355, 65);
+            this.grpBoxOutputName.Padding = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.grpBoxOutputName.Size = new System.Drawing.Size(266, 53);
             this.grpBoxOutputName.TabIndex = 3;
             this.grpBoxOutputName.TabStop = false;
             this.grpBoxOutputName.Text = "groupBox1";
@@ -94,31 +93,31 @@
             // grpBoxActivityLog
             // 
             this.grpBoxActivityLog.Controls.Add(this.txtActivityLog);
-            this.grpBoxActivityLog.Location = new System.Drawing.Point(12, 158);
-            this.grpBoxActivityLog.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.grpBoxActivityLog.Location = new System.Drawing.Point(9, 128);
+            this.grpBoxActivityLog.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.grpBoxActivityLog.Name = "grpBoxActivityLog";
-            this.grpBoxActivityLog.Padding = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.grpBoxActivityLog.Size = new System.Drawing.Size(347, 329);
+            this.grpBoxActivityLog.Padding = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.grpBoxActivityLog.Size = new System.Drawing.Size(260, 267);
             this.grpBoxActivityLog.TabIndex = 4;
             this.grpBoxActivityLog.TabStop = false;
             this.grpBoxActivityLog.Text = "groupBox1";
             // 
             // txtActivityLog
             // 
-            this.txtActivityLog.Location = new System.Drawing.Point(5, 25);
-            this.txtActivityLog.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.txtActivityLog.Location = new System.Drawing.Point(4, 20);
+            this.txtActivityLog.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.txtActivityLog.Multiline = true;
             this.txtActivityLog.Name = "txtActivityLog";
-            this.txtActivityLog.Size = new System.Drawing.Size(335, 290);
+            this.txtActivityLog.Size = new System.Drawing.Size(252, 236);
             this.txtActivityLog.TabIndex = 0;
             // 
             // chkWriteKmlCaption
             // 
             this.chkWriteKmlCaption.AutoSize = true;
-            this.chkWriteKmlCaption.Location = new System.Drawing.Point(209, 60);
-            this.chkWriteKmlCaption.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.chkWriteKmlCaption.Location = new System.Drawing.Point(157, 49);
+            this.chkWriteKmlCaption.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.chkWriteKmlCaption.Name = "chkWriteKmlCaption";
-            this.chkWriteKmlCaption.Size = new System.Drawing.Size(147, 21);
+            this.chkWriteKmlCaption.Size = new System.Drawing.Size(115, 17);
             this.chkWriteKmlCaption.TabIndex = 5;
             this.chkWriteKmlCaption.Text = "Write KML Caption";
             this.chkWriteKmlCaption.UseVisualStyleBackColor = true;
@@ -127,20 +126,19 @@
             // lblFileDest
             // 
             this.lblFileDest.AutoSize = true;
-            this.lblFileDest.Location = new System.Drawing.Point(19, 494);
-            this.lblFileDest.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.lblFileDest.Location = new System.Drawing.Point(14, 401);
             this.lblFileDest.Name = "lblFileDest";
-            this.lblFileDest.Size = new System.Drawing.Size(119, 17);
+            this.lblFileDest.Size = new System.Drawing.Size(91, 13);
             this.lblFileDest.TabIndex = 7;
             this.lblFileDest.Text = "KML Destination :";
             this.lblFileDest.MouseHover += new System.EventHandler(this.lblFileDest_MouseHover);
             // 
             // btnSetSavLoc
             // 
-            this.btnSetSavLoc.Location = new System.Drawing.Point(12, 53);
-            this.btnSetSavLoc.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.btnSetSavLoc.Location = new System.Drawing.Point(9, 43);
+            this.btnSetSavLoc.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.btnSetSavLoc.Name = "btnSetSavLoc";
-            this.btnSetSavLoc.Size = new System.Drawing.Size(157, 28);
+            this.btnSetSavLoc.Size = new System.Drawing.Size(118, 23);
             this.btnSetSavLoc.TabIndex = 8;
             this.btnSetSavLoc.Text = "&Set Save Location";
             this.btnSetSavLoc.UseVisualStyleBackColor = true;
@@ -148,10 +146,9 @@
             // 
             // button2
             // 
-            this.button2.Location = new System.Drawing.Point(417, 12);
-            this.button2.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.button2.Location = new System.Drawing.Point(313, 10);
             this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(100, 28);
+            this.button2.Size = new System.Drawing.Size(75, 23);
             this.button2.TabIndex = 9;
             this.button2.Text = "button2";
             this.button2.UseVisualStyleBackColor = true;
@@ -160,9 +157,9 @@
             // 
             // Form1
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(559, 517);
+            this.ClientSize = new System.Drawing.Size(288, 420);
             this.Controls.Add(this.button2);
             this.Controls.Add(this.btnSetSavLoc);
             this.Controls.Add(this.lblFileDest);
@@ -171,7 +168,6 @@
             this.Controls.Add(this.grpBoxOutputName);
             this.Controls.Add(this.btnopenfile);
             this.Controls.Add(this.button1);
-            this.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.MaximizeBox = false;
             this.Name = "Form1";
             this.Text = "Form1";

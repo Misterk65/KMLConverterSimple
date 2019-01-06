@@ -164,8 +164,6 @@ namespace KMLConverter
 
                 var workingArr = Readlog();
                 var trackArr = new List<string>();
-                var lastVector = "";
-                var lastSigQual = "";
                 var coordinates = new CoordinateCollection();
                 var unknown = false;
 
@@ -181,6 +179,8 @@ namespace KMLConverter
                     txtActivityLog.Text = txtActivityLog.Text + "Extracting used Network Types" + Environment.NewLine;
                     foreach (var line in workingArr)
                     {
+                        unknown = false;
+
                         acc = line.Split(',');
 
                         var internalNwType = acc[5].ToLower(); 
@@ -218,9 +218,19 @@ namespace KMLConverter
                             switch (internalNwType)
                             {
                                 case "lte":
-                                    // RSRP     >=-69       -69 to -92  -92 to -99     <= -100     dBm
-                                    var rsrp = Convert.ToDouble(acc[14]);
 
+                                    var rsrp = 0.0;
+
+                                    // RSRP     >=-69       -69 to -92  -92 to -99     <= -100     dBm
+                                    if (acc[14]=="unknown")
+                                    {
+                                        rsrp = -999;
+                                    }
+                                    else
+                                    {
+                                        rsrp = Convert.ToDouble(acc[14]);
+                                    }
+                                    
                                     if (rsrp > 0)
                                         rsrp = rsrp * -1;
 
@@ -266,9 +276,18 @@ namespace KMLConverter
                                 case "cdma":
                                     break;
                                 case "gsm":
+
+                                    var rssi = 0.0;
                                     // RSSI     >=-59       -59 to -81  -81 to -101     <= -101     dBm
 
-                                    var rssi = Convert.ToDouble(acc[13]);
+                                    if (acc[13] == "unknown")
+                                    {
+                                        rssi = 999;
+                                    }
+                                    else
+                                    {
+                                        rssi = Convert.ToDouble(acc[13]); 
+                                    }
 
                                     if (rssi > 0)
                                         rssi = rssi * -1;
@@ -318,7 +337,14 @@ namespace KMLConverter
                                 case "umts":
                                     // RSSI     >=-68       -68 to -84  -84 to -104     <= -104     dBm
 
-                                    rssi = Convert.ToDouble(acc[13]);
+                                    if (acc[13]=="unknown")
+                                    {
+                                        rssi = 999;
+                                    }
+                                    else
+                                    {
+                                        rssi = Convert.ToDouble(acc[13]);
+                                    }
 
                                     if (rssi > 0)
                                         rssi = rssi * -1;
@@ -388,6 +414,7 @@ namespace KMLConverter
                                           Environment.NewLine;
                     foreach (var line in workingArr)
                     {
+                        unknown = false;
                         acc = line.Split(',');
 
                         arrLength--;
@@ -424,9 +451,18 @@ namespace KMLConverter
                             switch (internalNwType)
                             {
                                 case "lte":
+
+                                    var rsrp = 0.0;
                                     // RSRP     >=-69       -69 to -92  -92 to -99     <= -100     dBm
 
-                                    var rsrp = Convert.ToDouble(acc[14]);//Todo
+                                    if (acc[14]=="unknown")
+                                    {
+                                        rsrp = 999;
+                                    }
+                                    else
+                                    {
+                                        rsrp = Convert.ToDouble(acc[14]);
+                                    }
 
                                     if (rsrp > 0)
                                         rsrp = rsrp * -1;
@@ -464,9 +500,20 @@ namespace KMLConverter
                                     //
                                     break;
                                 case "gsm":
+
+                                    var rssi = 0.0;
+
                                     //rssi values for 2G
                                     // RSSI     >=-59       -59 to -81  -81 to -101     <= -101     dBm
-                                    var rssi = Convert.ToDouble(acc[13]);
+
+                                    if (acc[13]=="unknown")
+                                    {
+                                        rssi = 999; 
+                                    }
+                                    else
+                                    {
+                                        rssi = Convert.ToDouble(acc[13]);
+                                    }
 
                                     if (rssi >= -59)
                                     {
@@ -499,7 +546,15 @@ namespace KMLConverter
                                     break;
                                 case "umts":
                                     // RSSI     >=-68       -68 to -84  -84 to -104     <= -104     dBm
-                                    rssi = Convert.ToDouble(acc[13]);
+
+                                    if (acc[13]=="unknown")
+                                    {
+                                        rssi = 999; 
+                                    }
+                                    else
+                                    {
+                                        rssi = Convert.ToDouble(acc[13]);
+                                    }
 
                                     if (rssi > 0)
                                         rssi = rssi * -1;
@@ -680,7 +735,7 @@ namespace KMLConverter
 
                         //if (x.Length >= 27 && Convert.ToInt32(x[x.Length-1])>=28)
                         //{
-                            if (x.Length > 9)
+                            if (x.Length >= 13)
                             {
                                     if (x.Length == 25)
                                         lineCoordinates.Add(x[0] + "," + x[1] + "," + x[2] + "," + x[3] + "," + x[4] + "," +
@@ -700,20 +755,34 @@ namespace KMLConverter
                                                             x[10] + "," + x[11] + "," + x[12] + "," + x[13] + "," + x[14] +
                                                             "," + x[15] + "," + x[16].Replace(",", ";") + "," + x[17] +
                                                             "," + x[18] + "," + x[19] + "," + x[20]);
+                                    else if (x.Length == 22 && Convert.ToInt32(x[x.Length - 1]) >= 28)
+                                        lineCoordinates.Add(x[0]/*time*/ + "," + x[1]/*lat*/ + "," + x[2]/*lon*/ + "," + x[3]/*spd*/ + "," + x[4]/*hnd*/ + "," +
+                                                            x[5]/*nwtype*/ + "," + x[6]/*registered*/ + "," + x[11]/*mcc*/ + "," + x[12]/*mnc*/ + "," + x[7]/*lac*/ + ","
+                                                            + x[8]/*ci*/ + "," + x[9]/*psc*/ + "," + x[10]/*channel*/ + "," + x[13]/*rsrp*/ + "," + x[14]/*ber*/ + ","
+                                                            + x[15]/*distance*/ + "," + x[16].Replace(",", ";")/*Address*/ + "," + x[17]/*provider*/ + ","
+                                                            + x[18]/*acc*/ + "," + x[19]/*roaming*/ + "," + x[20]/*poi*/ + "," + x[21]/*AndroidVersion*/);
                                     else if (x.Length == 22)
                                         lineCoordinates.Add(x[0] + "," + x[1] + "," + x[2] + "," + x[3] + "," + x[4] + "," +
                                                             x[5] + "," + x[6] + "," + x[7] + "," + x[8] + "," + x[9] + "," +
                                                             x[10] + "," + x[11] + "," + x[12] + "," + x[13] + "," + x[14] +
                                                             "," + x[15] + "," + x[16] + "," + x[17].Replace(",", ";") + "," +
                                                             x[18] + "," + x[19] + "," + x[20] + "," + x[21]);
-                                    else if (x.Length == 27)
+                                    else if (x.Length == 27 && Convert.ToInt32(x[x.Length - 1]) >= 28)
                                         lineCoordinates.Add(x[0]/*time*/ + "," + x[1]/*lat*/ + "," + x[2]/*lon*/ + "," + x[3]/*spd*/ + "," + x[4]/*hnd*/ + "," +
                                                             x[5]/*nwtype*/ + "," + x[6]/*registered*/ + "," + x[12]/*mcc*/ + "," + x[13]/*mnc*/ + "," + x[7]/*ci*/ + ","
                                                             + x[8]/*pci*/ + "," + x[9]/*tac*/ + "," + x[10]/*channel*/ + "," + x[14]/*ss*/ + "," + x[15]/*rsrp*/ + ","
                                                             + x[16]/*rsrq*/ + "," + x[17]/*rssnr*/ + "," + x[18]/*cqi*/ + "," + x[19]/*ta*/ + "," + x[20]/*distance*/ + "," +
                                                             x[21].Replace(",", ";")/*Address*/ + "," + x[22]/*provider*/ + "," + x[23]/*acc*/ + "," + x[24]/*roaming*/ +
-                                                            "," + x[25]/*poi*/ + "," + x[11]/*chbw*/ + "," + x[26]/*AndroidVersion*/);
-                                    else
+                                                                    "," + x[25]/*poi*/ + "," + x[11]/*chbw*/ + "," + x[26]/*AndroidVersion*/);
+                                    else if (x.Length == 13)
+                                    {
+                                        //lineCoordinates.Add(x[0]/*time*/ + "," + x[1]/*lat*/ + "," + x[2]/*lon*/ + "," + x[3]/*spd*/ + "," + x[4]/*hnd*/ + "," + x[5]/*nwtype*/ + "," + 
+                                        //      x[20]/*distance*/ + "," + x[21].Replace(",", ";")/*Address*/ + "," + x[22]/*provider*/  + "," + x[23]/*acc*/ + 
+                                        //      "," + x[24]/*roaming*/ + "," + x[25]/*poi*/  + "," + x[26]/*AndroidVersion*/);
+                                        //todo write import error log
+                                    }
+
+                            else
                                     {
                                         MessageBox.Show(
                                             "The logfile is not compatible with this Version of KML Converter.\r\rThe Application will be terminated!", "Error",
@@ -775,8 +844,7 @@ namespace KMLConverter
             var lineCoordinates = new List<string>();
             var FilePath = Application.StartupPath;
             var Filename = RawPath;
-           string[] x;
-
+           
             txtActivityLog.Text = "Read Log" + Environment.NewLine;
             Application.DoEvents();
 
@@ -983,6 +1051,7 @@ namespace KMLConverter
                 if (rsrp == "unknown")
                 {
                     newrsrp = 0.1;
+                    rsrp = "999";
                 }
                 else
                 {
@@ -1733,7 +1802,7 @@ namespace KMLConverter
                         document.AddFeature(MeasPoints("BalloonStyle" + id, itemArr[5], itemArr[1], itemArr[2],
                             itemArr[19]));
                     }
-                    else if (internalNwType == "umts" && itemArr.Length == 21)
+                    else if (internalNwType == "umts" && (itemArr.Length == 21|| itemArr.Length == 22))
                     {
                         var time = itemArr[0];
                         var lat = itemArr[1];

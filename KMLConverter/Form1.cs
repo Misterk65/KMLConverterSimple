@@ -767,20 +767,29 @@ namespace KMLConverter
                                                             x[10] + "," + x[11] + "," + x[12] + "," + x[13] + "," + x[14] +
                                                             "," + x[15] + "," + x[16] + "," + x[17].Replace(",", ";") + "," +
                                                             x[18] + "," + x[19] + "," + x[20] + "," + x[21]);
-                                    else if (x.Length == 27 && Convert.ToInt32(x[x.Length - 1]) >= 28)
+                                    else if (x.Length == 23)
+                                        lineCoordinates.Add(x[0] + "," + x[1] + "," + x[2] + "," + x[3] + "," + x[4] + "," +
+                                                            x[5] + "," + x[6] + "," + x[11] + "," + x[12] + "," + x[7] + "," +
+                                                            x[8] + "," + x[9] + "," + x[10] + "," + x[13] + "," + x[14] +
+                                                            "," + x[15] + "," + x[16] + "," + x[17].Replace(",", ";") + "," +
+                                                            x[18] + "," + x[19] + "," + x[20] + "," + x[21] + "," + x[22]);
+                            else if (x.Length == 27 && Convert.ToInt32(x[x.Length - 1]) >= 28)
                                         lineCoordinates.Add(x[0]/*time*/ + "," + x[1]/*lat*/ + "," + x[2]/*lon*/ + "," + x[3]/*spd*/ + "," + x[4]/*hnd*/ + "," +
                                                             x[5]/*nwtype*/ + "," + x[6]/*registered*/ + "," + x[12]/*mcc*/ + "," + x[13]/*mnc*/ + "," + x[7]/*ci*/ + ","
                                                             + x[8]/*pci*/ + "," + x[9]/*tac*/ + "," + x[10]/*channel*/ + "," + x[14]/*ss*/ + "," + x[15]/*rsrp*/ + ","
                                                             + x[16]/*rsrq*/ + "," + x[17]/*rssnr*/ + "," + x[18]/*cqi*/ + "," + x[19]/*ta*/ + "," + x[20]/*distance*/ + "," +
                                                             x[21].Replace(",", ";")/*Address*/ + "," + x[22]/*provider*/ + "," + x[23]/*acc*/ + "," + x[24]/*roaming*/ +
                                                                     "," + x[25]/*poi*/ + "," + x[11]/*chbw*/ + "," + x[26]/*AndroidVersion*/);
-                                    else if (x.Length == 13)
+                                    else if (x.Length == 13|| x.Length==23)
                                     {
                                         //lineCoordinates.Add(x[0]/*time*/ + "," + x[1]/*lat*/ + "," + x[2]/*lon*/ + "," + x[3]/*spd*/ + "," + x[4]/*hnd*/ + "," + x[5]/*nwtype*/ + "," + 
                                         //      x[20]/*distance*/ + "," + x[21].Replace(",", ";")/*Address*/ + "," + x[22]/*provider*/  + "," + x[23]/*acc*/ + 
                                         //      "," + x[24]/*roaming*/ + "," + x[25]/*poi*/  + "," + x[26]/*AndroidVersion*/);
                                         //todo write import error log
-                                    }
+                                        WriteInvalidLogFiles(x[0]/*time*/ + "," + x[1]/*lat*/ + "," + x[2]/*lon*/ + "," + x[3]/*spd*/ + "," + x[4]/*hnd*/ + "," + x[5]/*nwtype*/ + "," +
+                                                                x[6]/*distance*/ + "," + x[7].Replace(",", ";")/*Address*/ + "," + x[8]/*provider*/  + "," + x[9]/*acc*/ + 
+                                                                "," + x[10]/*roaming*/ + "," + x[11]/*poi*/  + "," + x[12]/*AndroidVersion*/);
+                            }
 
                             else
                                     {
@@ -2436,6 +2445,16 @@ namespace KMLConverter
             {
                 MessageBox.Show(ex.ToString());
             }
+        }
+
+        private static void WriteInvalidLogFiles(string InvalidData)
+        {
+            // Write single line to new file.
+            using (StreamWriter writer = new StreamWriter(Path.Combine(Application.StartupPath, "InvalidLogData.txt"), true))
+            {
+                writer.WriteLine(DateTime.Now + " : " + InvalidData );
+            }
+           
         }
 
         

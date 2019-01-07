@@ -1189,7 +1189,7 @@ namespace KMLConverter
                                      + "Latitude: " + lat + System.Environment.NewLine
                                      + "Longitude: " + lon + System.Environment.NewLine
                                      + "Location: " + location + System.Environment.NewLine
-                                     + "Accuracy: " + Math.Round(accuracy,2) + " m" + System.Environment.NewLine + System.Environment.NewLine
+                                     + "Accuracy: " + Math.Round(accuracy,0) + " m" + System.Environment.NewLine + System.Environment.NewLine
                                      + "Moving Data" + System.Environment.NewLine
                                      + string.Format("Speed: {0:N1} kph", Convert.ToDouble(spd)) +
                                      System.Environment.NewLine
@@ -1265,7 +1265,7 @@ namespace KMLConverter
                                      + "Latitude: " + lat + System.Environment.NewLine
                                      + "Longitude: " + lon + System.Environment.NewLine
                                      + "Location: " + location + System.Environment.NewLine
-                                     + "Accuracy: " + Math.Round(accuracy,2) + " m" + System.Environment.NewLine + System.Environment.NewLine
+                                     + "Accuracy: " + Math.Round(accuracy,0) + " m" + System.Environment.NewLine + System.Environment.NewLine
                                      + "Moving Data" + System.Environment.NewLine
                                      + string.Format("Speed: {0:N1} kph", Convert.ToDouble(spd)) +
                                      System.Environment.NewLine
@@ -1840,7 +1840,7 @@ namespace KMLConverter
                         document.AddFeature(MeasPoints("BalloonStyle" + id, itemArr[5], itemArr[1], itemArr[2],
                             itemArr[15]));
                     }
-                    else if (internalNwType == "gsm" && itemArr.Length == 22)
+                    else if (internalNwType == "gsm" && (itemArr.Length == 22|| itemArr.Length == 23))
                     {
                         //Output String Order TimeStamp; Latitude; Longitude; Speed; Heading; Network Type; Registered; MMC; MNC; LAC; Cid;
                         //Uarfcn; BSIC; RSSI; Ber; TA; Address; Provider
@@ -1873,6 +1873,7 @@ namespace KMLConverter
                         document.AddFeature(MeasPoints("BalloonStyle" + id, itemArr[5], itemArr[1], itemArr[2],
                             itemArr[16]));
                     }
+                   
                     id--;
                 }
 

@@ -735,79 +735,169 @@ namespace KMLConverter
                     {
                         x = checkForComma(srReader.ReadLine());
 
-                        //if (x.Length >= 27 && Convert.ToInt32(x[x.Length-1])>=28)
-                        //{
-                            if (x.Length >= 13)
-                            {
-                                    if (x.Length == 25)
-                                        lineCoordinates.Add(x[0] + "," + x[1] + "," + x[2] + "," + x[3] + "," + x[4] + "," +
-                                                            x[5] + "," + x[6] + "," + x[7] + "," + x[8] + "," + x[9] + "," + x[10] +
-                                                            "," + x[11] + "," + x[12] + "," + x[13] + "," + x[14] + "," + x[15] +
-                                                            "," + x[16] + "," + x[17] + "," + x[18] + "," + x[19].Replace(",", ";") +
-                                                            "," + x[20] + "," + x[21] + "," + x[22] + "," + x[23] + "," + x[24]);
-                                    else if (x.Length == 20)
-                                        lineCoordinates.Add(x[0] + "," + x[1] + "," + x[2] + "," + x[3] + "," + x[4] + "," +
-                                                            x[5] + "," + x[6] + "," + x[7] + "," + x[8] + "," + x[9] + "," + x[10] +
-                                                            "," + x[11] + ",unknown," + x[12] + "," + x[13] + "," + x[14] + "," +
-                                                            x[15].Replace(",", ";") + "," + x[16] + "," + x[17] + "," + x[18] + ","
-                                                            + x[19]);
-                                    else if (x.Length == 21)
-                                        lineCoordinates.Add(x[0] + "," + x[1] + "," + x[2] + "," + x[3] + "," + x[4] + "," +
-                                                            x[5] + "," + x[6] + "," + x[7] + "," + x[8] + "," + x[9] + "," +
-                                                            x[10] + "," + x[11] + "," + x[12] + "," + x[13] + "," + x[14] +
-                                                            "," + x[15] + "," + x[16].Replace(",", ";") + "," + x[17] +
-                                                            "," + x[18] + "," + x[19] + "," + x[20]);
-                                    else if (x.Length == 22 && Convert.ToInt32(x[x.Length - 1]) >= 28)
-                                        lineCoordinates.Add(x[0]/*time*/ + "," + x[1]/*lat*/ + "," + x[2]/*lon*/ + "," + x[3]/*spd*/ + "," + x[4]/*hnd*/ + "," +
-                                                            x[5]/*nwtype*/ + "," + x[6]/*registered*/ + "," + x[11]/*mcc*/ + "," + x[12]/*mnc*/ + "," + x[7]/*lac*/ + ","
-                                                            + x[8]/*ci*/ + "," + x[9]/*psc*/ + "," + x[10]/*channel*/ + "," + x[13]/*rsrp*/ + "," + x[14]/*ber*/ + ","
-                                                            + x[15]/*distance*/ + "," + x[16].Replace(",", ";")/*Address*/ + "," + x[17]/*provider*/ + ","
-                                                            + x[18]/*acc*/ + "," + x[19]/*roaming*/ + "," + x[20]/*poi*/ + "," + x[21]/*AndroidVersion*/);
-                                    else if (x.Length == 22)
-                                        lineCoordinates.Add(x[0] + "," + x[1] + "," + x[2] + "," + x[3] + "," + x[4] + "," +
-                                                            x[5] + "," + x[6] + "," + x[7] + "," + x[8] + "," + x[9] + "," +
-                                                            x[10] + "," + x[11] + "," + x[12] + "," + x[13] + "," + x[14] +
-                                                            "," + x[15] + "," + x[16] + "," + x[17].Replace(",", ";") + "," +
-                                                            x[18] + "," + x[19] + "," + x[20] + "," + x[21]);
-                                    else if (x.Length == 23)
-                                        lineCoordinates.Add(x[0] + "," + x[1] + "," + x[2] + "," + x[3] + "," + x[4] + "," +
-                                                            x[5] + "," + x[6] + "," + x[11] + "," + x[12] + "," + x[7] + "," +
-                                                            x[8] + "," + x[9] + "," + x[10] + "," + x[13] + "," + x[14] +
-                                                            "," + x[15] + "," + x[16] + "," + x[17].Replace(",", ";") + "," +
-                                                            x[18] + "," + x[19] + "," + x[20] + "," + x[21] + "," + x[22]);
-                                    else if (x.Length == 27 && Convert.ToInt32(x[x.Length - 1]) >= 28)
-                                        lineCoordinates.Add(x[0]/*time*/ + "," + x[1]/*lat*/ + "," + x[2]/*lon*/ + "," + x[3]/*spd*/ + "," + x[4]/*hnd*/ + "," +
-                                                            x[5]/*nwtype*/ + "," + x[6]/*registered*/ + "," + x[12]/*mcc*/ + "," + x[13]/*mnc*/ + "," + x[7]/*ci*/ + ","
-                                                            + x[8]/*pci*/ + "," + x[9]/*tac*/ + "," + x[10]/*channel*/ + "," + x[14]/*ss*/ + "," + x[15]/*rsrp*/ + ","
-                                                            + x[16]/*rsrq*/ + "," + x[17]/*rssnr*/ + "," + x[18]/*cqi*/ + "," + x[19]/*ta*/ + "," + x[20]/*distance*/ + "," +
-                                                            x[21].Replace(",", ";")/*Address*/ + "," + x[22]/*provider*/ + "," + x[23]/*acc*/ + "," + x[24]/*roaming*/ +
-                                                                    "," + x[25]/*poi*/ + "," + x[11]/*chbw*/ + "," + x[26]/*AndroidVersion*/);
-                                    else if (x.Length == 26)
-                                        lineCoordinates.Add(x[0] + "," + x[1] + "," + x[2] + "," + x[3] + "," + x[4] + "," +
-                                                            x[5] + "," + x[6] + "," + x[7] + "," + x[8] + "," + x[9] + "," + x[10] +
-                                                            "," + x[11] + "," + x[12] + "," + x[13] + "," + x[14] + "," + x[15] +
-                                                            "," + x[16] + "," + x[17] + "," + x[18] + "," + x[19].Replace(",", ";") +
-                                                            "," + x[20] + "," + x[21] + "," + x[22] + "," + x[23] + "," + x[24]);
-                            else if (x.Length == 13|| x.Length==23)
-                                    {
-                                        //lineCoordinates.Add(x[0]/*time*/ + "," + x[1]/*lat*/ + "," + x[2]/*lon*/ + "," + x[3]/*spd*/ + "," + x[4]/*hnd*/ + "," + x[5]/*nwtype*/ + "," + 
-                                        //      x[20]/*distance*/ + "," + x[21].Replace(",", ";")/*Address*/ + "," + x[22]/*provider*/  + "," + x[23]/*acc*/ + 
-                                        //      "," + x[24]/*roaming*/ + "," + x[25]/*poi*/  + "," + x[26]/*AndroidVersion*/);
-                                        //todo write import error log
-                                        WriteInvalidLogFiles(x[0]/*time*/ + "," + x[1]/*lat*/ + "," + x[2]/*lon*/ + "," + x[3]/*spd*/ + "," + x[4]/*hnd*/ + "," + x[5]/*nwtype*/ + "," +
-                                                                x[6]/*distance*/ + "," + x[7].Replace(",", ";")/*Address*/ + "," + x[8]/*provider*/  + "," + x[9]/*acc*/ + 
-                                                                "," + x[10]/*roaming*/ + "," + x[11]/*poi*/  + "," + x[12]/*AndroidVersion*/);
-                            }
+                        if (x.Length >= 13)
+                        {
+                            int n;
+                            bool isnumeric = int.TryParse(x[x.Length - 1], out n);
 
-                            else
-                                    {
-                                        MessageBox.Show(
-                                            "The logfile is not compatible with this Version of KML Converter.\r\rThe Application will be terminated!", "Error",
-                                            MessageBoxButtons.OK, MessageBoxIcon.Error);
-                                       Application.Exit();
-                                       break;
-                                    }
+                            if (isnumeric)
+                            {
+                                if (x.Length == 22 && Convert.ToInt32(x[x.Length - 1]) >= 28)
+                                    lineCoordinates.Add(x[0] /*time*/ + "," + x[1] /*lat*/ + "," + x[2] /*lon*/ + "," +
+                                                        x[3] /*spd*/ + "," + x[4] /*hnd*/ + "," +
+                                                        x[5] /*nwtype*/ + "," + x[6] /*registered*/ + "," +
+                                                        x[11] /*mcc*/ + "," + x[12] /*mnc*/ + "," + x[7] /*lac*/ + ","
+                                                        + x[8] /*ci*/ + "," + x[9] /*psc*/ + "," + x[10] /*channel*/ +
+                                                        "," + x[13] /*rsrp*/ + "," + x[14] /*ber*/ + ","
+                                                        + x[15] /*distance*/ + "," +
+                                                        x[16].Replace(",", ";") /*Address*/ + "," + x[17] /*provider*/ +
+                                                        ","
+                                                        + x[18] /*acc*/ + "," + x[19] /*roaming*/ + "," +
+                                                        x[20] /*poi*/ + "," + x[21] /*AndroidVersion*/);
+                                else if (x.Length == 22 && Convert.ToInt32(x[x.Length - 1]) <= 28)
+                                    lineCoordinates.Add(x[0] /*time*/ + "," + x[1] /*lat*/ + "," + x[2] /*lon*/ + "," +
+                                                        x[3] /*spd*/ + "," + x[4] /*hnd*/ + "," +
+                                                        x[5] /*nwtype*/ + "," + x[6] /*registered*/ + "," +
+                                                        x[7] /*mcc*/ + "," + x[8] /*mnc*/ + "," + x[9] /*lac*/ + ","
+                                                        + x[10] /*ci*/ + "," + x[11] /*psc*/ + "," + x[12] /*channel*/ +
+                                                        "," + x[13] /*rsrp*/ + "," + x[14] /*ber*/ + ","
+                                                        + x[15] /*distance*/ + "," +
+                                                        x[16].Replace(",", ";") /*Address*/ + "," + x[17] /*provider*/ +
+                                                        ","
+                                                        + x[18] /*acc*/ + "," + x[19] /*roaming*/ + "," +
+                                                        x[20] /*poi*/ + "," + x[21] /*AndroidVersion*/);
+                                else if (x.Length == 23 && (Convert.ToInt32(x[x.Length - 1]) >= 28))
+                                    lineCoordinates.Add(x[0] /*time*/ + "," + x[1] /*lat*/ + "," + x[2] /*lon*/ + "," +
+                                                        x[3] /*spd*/ + "," + x[4] /*hnd*/ + "," +
+                                                        x[5] /*nwtype*/ + "," + x[6] /*registered*/ + "," +
+                                                        x[12] /*mcc*/ + "," + x[13] /*mnc*/ + "," + x[7] /*ci*/ + "," +
+                                                        x[8] /*lac*/ + "," + x[9] /*channel*/ + "," + x[10] /*bsic*/ +
+                                                        "," + x[13] /*rsrp*/ + "," + x[14] /*ber*/ +
+                                                        "," + x[15] /*level*/ + "," + x[16] /*distance*/ + "," +
+                                                        x[17].Replace(",", ";") /*address*/ + "," +
+                                                        x[18] /*provider*/ + "," + x[19] /*acc*/ + "," +
+                                                        x[20] /*roaming*/ + "," + x[21] /*poi*/);
+                                else if (x.Length == 23 && (Convert.ToInt32(x[x.Length - 1]) <= 28))
+                                    lineCoordinates.Add(x[0] /*time*/ + "," + x[1] /*lat*/ + "," + x[2] /*lon*/ + "," +
+                                                        x[3] /*spd*/ + "," + x[4] /*hnd*/ + "," +
+                                                        x[5] /*nwtype*/ + "," + x[6] /*registered*/ + "," +
+                                                        x[7] /*mcc*/ + "," + x[8] /*mnc*/ + "," + x[9] /*ci*/ + "," +
+                                                        x[10] /*lac*/ + "," + x[11] /*channel*/ + "," + x[12] /*bsic*/ +
+                                                        "," + x[13] /*rsrp*/ + "," + x[14] /*ber*/ +
+                                                        "," + x[15] /*level*/ + "," + x[16] /*distance*/ + "," +
+                                                        x[17].Replace(",", ";") /*address*/ + "," +
+                                                        x[18] /*provider*/ + "," + x[19] /*acc*/ + "," +
+                                                        x[20] /*roaming*/ + "," + x[21] /*poi*/);
+                                else if (x.Length == 27 && Convert.ToInt32(x[x.Length - 1]) >= 28)
+                                    lineCoordinates.Add(x[0] /*time*/ + "," + x[1] /*lat*/ + "," + x[2] /*lon*/ + "," +
+                                                        x[3] /*spd*/ + "," + x[4] /*hnd*/ + "," +
+                                                        x[5] /*nwtype*/ + "," + x[6] /*registered*/ + "," +
+                                                        x[12] /*mcc*/ + "," + x[13] /*mnc*/ + "," + x[7] /*ci*/ + ","
+                                                        + x[8] /*pci*/ + "," + x[9] /*tac*/ + "," + x[10] /*channel*/ +
+                                                        "," + x[14] /*ss*/ + "," + x[15] /*rsrp*/ + ","
+                                                        + x[16] /*rsrq*/ + "," + x[17] /*rssnr*/ + "," + x[18] /*cqi*/ +
+                                                        "," + x[19] /*ta*/ + "," + x[20] /*distance*/ + "," +
+                                                        x[21].Replace(",", ";") /*Address*/ + "," + x[22] /*provider*/ +
+                                                        "," + x[23] /*acc*/ + "," + x[24] /*roaming*/ +
+                                                        "," + x[25] /*poi*/ + "," + x[11] /*chbw*/ + "," +
+                                                        x[26] /*AndroidVersion*/);
                             }
+                            else
+                            {
+                                if (x.Length == 25)
+                                    lineCoordinates.Add(x[0] + "," + x[1] + "," + x[2] + "," + x[3] + "," + x[4] +
+                                                        "," +
+                                                        x[5] + "," + x[6] + "," + x[7] + "," + x[8] + "," + x[9] +
+                                                        "," + x[10] +
+                                                        "," + x[11] + "," + x[12] + "," + x[13] + "," + x[14] +
+                                                        "," + x[15] +
+                                                        "," + x[16] + "," + x[17] + "," + x[18] + "," +
+                                                        x[19].Replace(",", ";") +
+                                                        "," + x[20] + "," + x[21] + "," + x[22] + "," + x[23] +
+                                                        "," + x[24]);
+                                else if (x.Length == 20)
+                                    lineCoordinates.Add(x[0] + "," + x[1] + "," + x[2] + "," + x[3] + "," + x[4] +
+                                                        "," +
+                                                        x[5] + "," + x[6] + "," + x[7] + "," + x[8] + "," + x[9] +
+                                                        "," + x[10] +
+                                                        "," + x[11] + ",unknown," + x[12] + "," + x[13] + "," +
+                                                        x[14] + "," +
+                                                        x[15].Replace(",", ";") + "," + x[16] + "," + x[17] + "," +
+                                                        x[18] + ","
+                                                        + x[19]);
+                                else if (x.Length == 21)
+                                    lineCoordinates.Add(x[0] + "," + x[1] + "," + x[2] + "," + x[3] + "," + x[4] +
+                                                        "," +
+                                                        x[5] + "," + x[6] + "," + x[7] + "," + x[8] + "," + x[9] +
+                                                        "," +
+                                                        x[10] + "," + x[11] + "," + x[12] + "," + x[13] + "," +
+                                                        x[14] +
+                                                        "," + x[15] + "," + x[16].Replace(",", ";") + "," + x[17] +
+                                                        "," + x[18] + "," + x[19] + "," + x[20]);
+
+                                else if (x.Length == 22)
+                                    lineCoordinates.Add(x[0] + "," + x[1] + "," + x[2] + "," + x[3] + "," + x[4] +
+                                                        "," +
+                                                        x[5] + "," + x[6] + "," + x[7] + "," + x[8] + "," + x[9] +
+                                                        "," +
+                                                        x[10] + "," + x[11] + "," + x[12] + "," + x[13] + "," +
+                                                        x[14] +
+                                                        "," + x[15] + "," + x[16] + "," + x[17].Replace(",", ";") +
+                                                        "," +
+                                                        x[18] + "," + x[19] + "," + x[20] + "," + x[21]);
+
+                                else if (x.Length == 23)
+                                    lineCoordinates.Add(x[0] /*time*/ + "," + x[1] /*lat*/ + "," + x[2] /*lon*/ +
+                                                        "," + x[3] /*spd*/ + "," + x[4] /*hnd*/ + "," +
+                                                        x[5] /*nwtype*/ + "," + x[6] /*registered*/ + "," +
+                                                        x[11] /*mcc*/ + "," + x[12] /*mnc*/ + "," + x[7] /*ci*/ +
+                                                        "," +
+                                                        x[8] /*lac*/ + "," + x[9] /*channel*/ + "," +
+                                                        x[10] /*bsic*/ + "," + x[13] /*rsrp*/ + "," +
+                                                        x[14] /*ber*/ +
+                                                        "," + x[15] /*level*/ + "," + x[16] /*distance*/ + "," +
+                                                        x[17].Replace(",", ";") /*address*/ + "," +
+                                                        x[18] /*provider*/ + "," + x[19] /*acc*/ + "," +
+                                                        x[20] /*roaming*/ + "," + x[21] /*poi*/ + "," +
+                                                        x[22]) /*AndroidVersion*/;
+
+                                else if (x.Length == 26)
+                                    lineCoordinates.Add(x[0] + "," + x[1] + "," + x[2] + "," + x[3] + "," + x[4] +
+                                                        "," +
+                                                        x[5] + "," + x[6] + "," + x[7] + "," + x[8] + "," + x[9] +
+                                                        "," + x[10] +
+                                                        "," + x[11] + "," + x[12] + "," + x[13] + "," + x[14] +
+                                                        "," + x[15] +
+                                                        "," + x[16] + "," + x[17] + "," + x[18] + "," +
+                                                        x[19].Replace(",", ";") +
+                                                        "," + x[20] + "," + x[21] + "," + x[22] + "," + x[23] +
+                                                        "," + x[24]);
+                                else if (x.Length == 13)
+                                {
+                                    //lineCoordinates.Add(x[0]/*time*/ + "," + x[1]/*lat*/ + "," + x[2]/*lon*/ + "," + x[3]/*spd*/ + "," + x[4]/*hnd*/ + "," + x[5]/*nwtype*/ + "," + 
+                                    //      x[20]/*distance*/ + "," + x[21].Replace(",", ";")/*Address*/ + "," + x[22]/*provider*/  + "," + x[23]/*acc*/ + 
+                                    //      "," + x[24]/*roaming*/ + "," + x[25]/*poi*/  + "," + x[26]/*AndroidVersion*/);
+                                    //todo write import error log
+                                    WriteInvalidLogFiles(x[0] /*time*/ + "," + x[1] /*lat*/ + "," + x[2] /*lon*/ +
+                                                         "," + x[3] /*spd*/ + "," + x[4] /*hnd*/ + "," +
+                                                         x[5] /*nwtype*/ + "," +
+                                                         x[6] /*distance*/ + "," +
+                                                         x[7].Replace(",", ";") /*Address*/ + "," +
+                                                         x[8] /*provider*/ + "," + x[9] /*acc*/ +
+                                                         "," + x[10] /*roaming*/ + "," + x[11] /*poi*/ + "," +
+                                                         x[12] /*AndroidVersion*/);
+                                }
+                                else
+                                {
+                                    MessageBox.Show(
+                                        "The logfile is not compatible with this Version of KML Converter.\r\rThe Application will be terminated!",
+                                        "Error",
+                                        MessageBoxButtons.OK, MessageBoxIcon.Error);
+                                    Application.Exit();
+                                    break;
+                                }
+                            }
+                        }
                         /*
                              0: 636814354936713870; time
                              1: 37.51966462; lat
@@ -838,7 +928,7 @@ namespace KMLConverter
                              26: 28 android version
                          */
 
-                        
+
                         //}
                     }
                 }

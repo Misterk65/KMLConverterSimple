@@ -740,10 +740,19 @@ namespace KMLConverter
                             int n;
                             bool isnumeric = int.TryParse(x[x.Length - 1], out n);
 
-                            /*if (x[5].ToLower()=="lte")
+                            if (x[0]=="636826173573814380")
                             {
                                 MessageBox.Show(x[5]); 
-                            }*/
+                            }
+                            var internalNwType = x[5].ToLower();
+
+                            if (internalNwType == "umts" || internalNwType == "hsdpa" ||
+                                internalNwType == "hsupa" || internalNwType == "hspap" ||
+                                internalNwType == "hspa" || internalNwType == "tdscdma")
+                                internalNwType = "umts";
+
+                            if (internalNwType == "gsm" || internalNwType == "gprs" || internalNwType == "edge")
+                                internalNwType = "gsm";
 
                             if (isnumeric)
                             {
@@ -759,7 +768,7 @@ namespace KMLConverter
                                                         ","
                                                         + x[18] /*acc*/ + "," + x[19] /*roaming*/ + "," +
                                                         x[20] /*poi*/ + "," + x[21] /*AndroidVersion*/);
-                                else if (x.Length == 22 && Convert.ToInt32(x[x.Length - 1]) <= 28)
+                                else if (x.Length == 22 && Convert.ToInt32(x[x.Length - 1]) <= 28 && internalNwType=="umts")
                                     lineCoordinates.Add(x[0] /*time*/ + "," + x[1] /*lat*/ + "," + x[2] /*lon*/ + "," +
                                                         x[3] /*spd*/ + "," + x[4] /*hnd*/ + "," +
                                                         x[5] /*nwtype*/ + "," + x[6] /*registered*/ + "," +
@@ -768,9 +777,19 @@ namespace KMLConverter
                                                         "," + x[13] /*rsrp*/ + "," + x[14] /*ber*/ + ","
                                                         + x[15] /*distance*/ + "," +
                                                         x[16].Replace(",", ";") /*Address*/ + "," + x[17] /*provider*/ +
-                                                        ","
-                                                        + x[18] /*acc*/ + "," + x[19] /*roaming*/ + "," +
+                                                        ","+ x[18] /*acc*/ + "," + x[19] /*roaming*/ + "," +
                                                         x[20] /*poi*/ + "," + x[21] /*AndroidVersion*/);
+                                else if (x.Length == 22 && (Convert.ToInt32(x[x.Length - 1]) <= 28) && internalNwType=="gsm")
+                                    lineCoordinates.Add(x[0] /*time*/ + "," + x[1] /*lat*/ + "," + x[2] /*lon*/ + "," +
+                                                        x[3] /*spd*/ + "," + x[4] /*hnd*/ + "," +
+                                                        x[5] /*nwtype*/ + "," + x[6] /*registered*/ + "," +
+                                                        x[7] /*mcc*/ + "," + x[8] /*mnc*/ + "," +
+                                                        x[9] /*lac*/ + "," + x[10] /*channel*/ + "," + x[11] /*bsic*/ +
+                                                        "," + x[12] /*rsrp*/ + "," + x[13] /*ber*/ +
+                                                        "," + x[14] /*level*/ + "," + x[15] /*distance*/ + "," +
+                                                        x[16].Replace(",", ";") /*address*/ + "," +
+                                                        x[17] /*provider*/ + "," + x[18] /*acc*/ + "," +
+                                                        x[19] /*roaming*/ + "," + x[20] /*poi*/);
                                 else if (x.Length == 23 && (Convert.ToInt32(x[x.Length - 1]) >= 28))
                                     lineCoordinates.Add(x[0] /*time*/ + "," + x[1] /*lat*/ + "," + x[2] /*lon*/ + "," +
                                                         x[3] /*spd*/ + "," + x[4] /*hnd*/ + "," +
@@ -1847,10 +1866,10 @@ namespace KMLConverter
 
                 foreach (var item in workArray)
                 {
-                    if (id == 274)
+                    /*if (id == 274)
                     {
 
-                    }
+                    }*/
 
                     var itemArr = item.Split(',');
 

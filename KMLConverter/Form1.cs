@@ -740,11 +740,7 @@ namespace KMLConverter
                             int n;
                             bool isnumeric = int.TryParse(x[x.Length - 1], out n);
 
-                            if (x[0]=="636826173573814380")
-                            {
-                                MessageBox.Show(x[5]); 
-                            }
-                            var internalNwType = x[5].ToLower();
+                           var internalNwType = x[5].ToLower();
 
                             if (internalNwType == "umts" || internalNwType == "hsdpa" ||
                                 internalNwType == "hsupa" || internalNwType == "hspap" ||

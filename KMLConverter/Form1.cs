@@ -740,6 +740,11 @@ namespace KMLConverter
                             int n;
                             bool isnumeric = int.TryParse(x[x.Length - 1], out n);
 
+                            /*if (x[5].ToLower()=="lte")
+                            {
+                                MessageBox.Show(x[5]); 
+                            }*/
+
                             if (isnumeric)
                             {
                                 if (x.Length == 22 && Convert.ToInt32(x[x.Length - 1]) >= 28)
@@ -788,6 +793,17 @@ namespace KMLConverter
                                                         x[17].Replace(",", ";") /*address*/ + "," +
                                                         x[18] /*provider*/ + "," + x[19] /*acc*/ + "," +
                                                         x[20] /*roaming*/ + "," + x[21] /*poi*/);
+                                else if (x.Length == 26)
+                                    lineCoordinates.Add(x[0] + "," + x[1] + "," + x[2] + "," + x[3] + "," + x[4] +
+                                                        "," +
+                                                        x[5] + "," + x[6] + "," + x[7] + "," + x[8] + "," + x[9] +
+                                                        "," + x[10] +
+                                                        "," + x[11] + "," + x[12] + "," + x[13] + "," + x[14] +
+                                                        "," + x[15] +
+                                                        "," + x[16] + "," + x[17] + "," + x[18] + "," +
+                                                        x[19].Replace(",", ";") +
+                                                        "," + x[20] + "," + x[21] + "," + x[22] + "," + x[23] +
+                                                        "," + x[24]);
                                 else if (x.Length == 27 && Convert.ToInt32(x[x.Length - 1]) >= 28)
                                     lineCoordinates.Add(x[0] /*time*/ + "," + x[1] /*lat*/ + "," + x[2] /*lon*/ + "," +
                                                         x[3] /*spd*/ + "," + x[4] /*hnd*/ + "," +
@@ -1822,14 +1838,20 @@ namespace KMLConverter
 
         public static Document CreateMeasPoints(Document document, string[] workArray)
         {
+            var id = 0;
             try
             {
-                var id = workArray.Length;
+                id = workArray.Length;
                 document.Name = "Measurement Points";
                 document.Visibility = false;
 
                 foreach (var item in workArray)
                 {
+                    if (id == 274)
+                    {
+
+                    }
+
                     var itemArr = item.Split(',');
 
                     var internalNwType = itemArr[5].ToLower(); //Todo changed in this version
@@ -1980,7 +2002,7 @@ namespace KMLConverter
             catch (Exception ex)
             {
                 var style = new Style();
-                MessageBox.Show(ex.Message);
+                MessageBox.Show(ex.Message + " " +id);
                 return document;
             }
         }

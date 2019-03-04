@@ -1107,7 +1107,7 @@ namespace KMLConverter
             {
                 if (InformationElementNwType.ToLower() == "lte")
                 {
-                    uri = "http://www.e-i-t.de/markerL.png";
+                    uri = "http://e-i-t.de/PNG/markerL.png";
                     outText = "Cell Handover Info" + Environment.NewLine + Environment.NewLine
                               + "Handover Timestamp: " + dt + Environment.NewLine + Environment.NewLine
                               + "Location: " + address + Environment.NewLine
@@ -1118,7 +1118,7 @@ namespace KMLConverter
                 }
                 else if (InformationElementNwType.ToLower() == "gsm")
                 {
-                    uri = "http://www.e-i-t.de/markerG.png";
+                    uri = "http://e-i-t.de/PNG/markerG.png";
                     outText = "Cell Handover Info" + Environment.NewLine + Environment.NewLine
                               + "Handover Timestamp: " + dt + Environment.NewLine + Environment.NewLine
                               + "Location: " + address + Environment.NewLine
@@ -1129,7 +1129,7 @@ namespace KMLConverter
                 }
                 else
                 {
-                    uri = "http://www.e-i-t.de/markerU.png";
+                    uri = "http://e-i-t.de/PNG/markerU.png";
                     outText = "Cell Handover Info" + Environment.NewLine + Environment.NewLine
                               + "Handover Timestamp: " + dt + Environment.NewLine + Environment.NewLine
                               + "Location: " + address + Environment.NewLine
